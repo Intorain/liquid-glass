@@ -4,7 +4,7 @@ Bug fixes, documentation improvements, and focused contributions are welcome. Fo
 
 ## Getting started
 
-Fork the repository, create a branch, and install Bun 1.4.2.
+Fork the repository and install Bun 1.4.2.
 
 ```sh
 bun install --frozen-lockfile
@@ -15,31 +15,17 @@ The development command builds and watches the package alongside the site. Examp
 
 ## Checks
 
-```sh
-bun run typecheck
-bun run lint
-bun run test
-bun run build
-bun run check:package
-bun run check:publish
-bun run check:size
-```
+`bun install` points Git at `.githooks`, whose `pre-push` hook runs `scripts/pre-push.sh`: the version guard, typecheck, lint, tests, build, package, publish and size checks. When rendering code changes, it also runs the GPU doctor, shader validation and the GPU smoke test, so pushing rendering changes needs a machine with a GPU. Pushes that only change Markdown skip the checks.
 
-CI runs these checks and the version guard on pull requests. For rendering changes, also run:
-
-```sh
-bun run check:gpu
-bun run check:shader
-bun run test:gpu
-```
+There's no CI on everyday work, on purpose. The owner works alone with AI agents, and agents run the checks before anything leaves the machine. CI would repeat the same commands and cost money, while the hook makes the checks impossible to skip. Releases run them again in `publish.yml`.
 
 Use the installed vgpu tools through `bun run vgpu`. Start with `docs cat getting-started.md` and `docs cat shader-workflow.docs.md`; use `docs find` and `examples search` for API details.
 
-Review rendering changes in the site's examples in Chromium, Safari, Firefox, and Electron. Check both appearances and materials. Record browser versions, observed results, and anything you could not check in the PR. An unavailable GPU adapter is not a passing result. The manual GPU workflow needs a macOS runner labelled `gpu`; ordinary CI does not verify browser rendering. For comparison with system materials, use the [native reference app](apps/native-reference/README.md).
+Review rendering changes in the site's examples in Chromium, Safari, Firefox, and Electron. Check both appearances and materials. Record browser versions, observed results, and anything you could not check with your change. An unavailable GPU adapter is not a passing result. For comparison with system materials, use the [native reference app](apps/native-reference/README.md).
 
 ## Pull requests
 
-Title commits and PRs as [Conventional Commits](https://www.conventionalcommits.org): `type(scope): summary`, such as `fix(webkit): follow Safari page zoom`. PRs are squash-merged, so the title becomes the commit on `main`. Keep each PR focused on one problem. Explain the change and how you checked it. Include before/after screenshots for visual changes, and a recording when motion matters; attach them to the PR rather than committing them. Maintainers review and merge contributions after CI passes and review conversations are resolved.
+Title commits and PRs as [Conventional Commits](https://www.conventionalcommits.org): `type(scope): summary`, such as `fix(webkit): follow Safari page zoom`. PRs are squash-merged, so the title becomes the commit on `main`. Keep each PR focused on one problem. Explain the change and how you checked it. Include before/after screenshots for visual changes, and a recording when motion matters; attach them to the PR rather than committing them. Maintainers review and merge contributions once review conversations are resolved.
 
 Update usage documentation when the API or requirements change. Keep implementation reports, audit logs, and scratch notes out of the repository. Include only source and assets we can distribute.
 

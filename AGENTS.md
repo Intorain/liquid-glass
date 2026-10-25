@@ -10,17 +10,19 @@
 - Publish only our source, measurements we own, and permitted assets. Never commit extracted framework binaries or disassembly.
 - When interacting with Cloudflare, use `cf` unless the project has a Wrangler configuration.
 
-## Commits and pull requests
+## Commits
 
-- Write commit messages and PR titles as Conventional Commits: `type(scope): summary`, lowercase and imperative, for example `fix(webkit): keep filters alive on repaints far from every lens`. Types: `feat`, `fix`, `perf`, `refactor`, `docs`, `test`, `build`, `ci`, `chore`. Scopes name the area: `webkit`, `gecko`, `chromium`, `progressive`, `gpu`, `react`, `package`, `site`, `native-reference`.
-- Pull requests are squash-merged, so the PR title becomes the commit on `main`. Give it the same form, and use the body to explain the change and how it was checked.
-- Work on a branch and merge through a PR; do not leave commits on local `main`.
+- Write commit messages as Conventional Commits: `type(scope): summary`, lowercase and imperative, for example `fix(webkit): keep filters alive on repaints far from every lens`. Types: `feat`, `fix`, `perf`, `refactor`, `docs`, `test`, `build`, `ci`, `chore`. Scopes name the area: `webkit`, `gecko`, `chromium`, `progressive`, `gpu`, `react`, `package`, `site`, `native-reference`.
+
+## Checks
+
+A `pre-push` hook runs every check and blocks a push that fails. There's no CI on everyday work, on purpose: [Contributing](CONTRIBUTING.md#checks) explains why. Don't add it back.
 
 ## Documentation
 
 Write for someone using or contributing to the library. Lead with installation and a working example; explain props, requirements, and surprising limitations. Keep architecture secondary and avoid repeating what types or code already explain.
 
-Rewrite outdated sections instead of appending implementation histories. Keep conversational references, plans, audit logs, publication receipts, and PR summaries out of repository documentation. Put verification evidence in the PR and release summaries in GitHub releases. Add a document only when it has a distinct, durable purpose.
+Rewrite outdated sections instead of appending implementation histories. Keep conversational references, plans, audit logs, and publication receipts out of repository documentation. Put verification evidence in commit messages and release summaries in GitHub releases. Add a document only when it has a distinct, durable purpose.
 
 ## Scope and copy
 
